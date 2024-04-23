@@ -1,6 +1,14 @@
+import com.android.build.gradle.internal.utils.isKspPluginApplied
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+
+//    kotlin("ksp")
+//    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -22,11 +30,11 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+//            isMinifyEnabled = true
+//            proguardFiles(
+//                getDefaultProguardFile("proguard-android-optimize.txt"),
+//                "proguard-rules.pro"
+//            )
         }
     }
     compileOptions {
@@ -40,7 +48,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.12"
     }
     packaging {
         resources {
@@ -66,4 +74,35 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.okhttp.logging)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.gson.converter)
+    implementation(libs.retrofit.kotlin.serialization)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.navigation.compose)
+    androidTestImplementation(libs.androidx.navigation.testing)
+
+    implementation(libs.androidx.lifecycle.viewModelCompose)
+
+    implementation(libs.coil.kt)
+    implementation(libs.coil.kt.svg)
+    implementation(libs.coil.kt.compose)
+
+    implementation(libs.androidx.ui.tooling.preview)
+    debugImplementation(libs.androidx.ui.tooling)
+
+    implementation(libs.paging.compose)
+    implementation(libs.paging.runtime)
+
+
+//    implementation(lib)
+
+//    implementation("com.google.dagger:hilt-android:2.51")
+//    ksp("com.google.dagger:hilt-android-compiler:2.51")
+
 }
